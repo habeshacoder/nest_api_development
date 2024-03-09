@@ -3,11 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthDto } from './dto/auth.dto';
 import * as argon from 'argon2';
+import { ConfigService } from '@nestjs/config';
+import { config } from 'process';
 @Injectable()
 export class AuthService {
   constructor(
     private prismaService: PrismaService,
     private jwt: JwtService,
+  private  config:ConfigService
   ) {
     console.log('prismaServiceStart');
   }
@@ -39,6 +42,19 @@ export class AuthService {
     }
     console.log(this.prismaService.user.fields.sex);
     delete user.hash;
-    return user;
+    return this.signInToken(user.id,user.email);
+  }
+
+  async signInToken(userId:number,email:string):Promise<{accessToken:String}>{
+    const payload={sub:userId,email,};
+   const secret= this.config.get("JWT_SECRET");
+   const  accessToken=await this.jwt.signAsync(payload,{
+    expiresIn:"50m",
+    secret:secret
+  });
+    return {
+      "accessToken":accessToken
+    }
+
   }
 }
