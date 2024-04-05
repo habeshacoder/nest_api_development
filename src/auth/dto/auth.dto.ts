@@ -11,4 +11,9 @@ export class AuthDto {
   @IsString()
   @IsNotEmpty()
   sex: String;
+  @IsNotEmpty()
+  lastName: String;
+  @IsString()
+  @IsNotEmpty()
+  firstName: String;
 }

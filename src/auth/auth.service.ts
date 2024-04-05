@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private prismaService: PrismaService,
     private jwt: JwtService,
-  private  config:ConfigService
+    private config: ConfigService,
   ) {
     console.log('prismaServiceStart');
   }
@@ -41,19 +41,22 @@ export class AuthService {
     }
     console.log(this.prismaService.user.fields.sex);
     delete user.hash;
-    return this.signInToken(user.id,user.email);
+    return this.signInToken(user.id, user.email);
   }
 
-  async signInToken(userId:number,email:string):Promise<{accessToken:String}>{
-    const payload={sub:userId,email,};
-   const secret= this.config.get("JWT_SECRET");
-   const  accessToken=await this.jwt.signAsync(payload,{
-    expiresIn:"50m",
-    secret:secret
-  });
+  //generate JWT accessToken
+  async signInToken(
+    userId: number,
+    email: string,
+  ): Promise<{ accessToken: String }> {
+    const payload = { sub: userId, email };
+    const secret = this.config.get('JWT_SECRET');
+    const accessToken = await this.jwt.signAsync(payload, {
+      expiresIn: '5m',
+      secret: secret,
+    });
     return {
-      "accessToken":accessToken
-    }
-
+      accessToken: accessToken,
+    };
   }
 }
