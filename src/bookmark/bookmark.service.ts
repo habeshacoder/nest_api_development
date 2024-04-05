@@ -3,6 +3,8 @@ import { Controller, Get, Patch, Delete, Post, Param } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { CreateBookMarkDto } from './dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { userInfo } from 'os';
+import { EditBookMarkDto } from './dto/edit_bookmark.dto';
 
 @Injectable()
 export class BookmarkService {
@@ -19,11 +21,36 @@ export class BookmarkService {
     });
   }
 
-  getAllBookmarks() {}
+  async getAllBookmarks() {
+    const bookmarks = await this.prismaService.bookMark.findMany();
+    console.log(bookmarks);
+    return bookmarks;
+  }
 
-  getBookmarkById(@Param('id') id: string) {}
+  async getBookmarkById(id: string) {
+    return this.prismaService.bookMark.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+    });
+  }
 
-  editBookmark(@Param('id') id: string) {}
+  editBookmark(id: string, dto: EditBookMarkDto) {
+    return this.prismaService.bookMark.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: {
+        ...dto,
+      },
+    });
+  }
 
-  deleteBookmark(@Param('id') id: string) {}
+  deleteBookmarkById(@Param('id') id: string) {
+    return this.prismaService.bookMark.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+  }
 }

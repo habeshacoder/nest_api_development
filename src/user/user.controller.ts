@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -31,5 +32,9 @@ export class UserController {
     console.log('data from controller:', dto);
 
     return this.userService.updateUser(id, dto);
+  }
+  @Delete('delete/:id')
+  delete(@Param('id') id: number) {
+    return this.userService.delete(id);
   }
 }
