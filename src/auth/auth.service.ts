@@ -10,9 +10,7 @@ export class AuthService {
     private prismaService: PrismaService,
     private jwt: JwtService,
     private config: ConfigService,
-  ) {
-    console.log('prismaServiceStart');
-  }
+  ) {}
   async signUp(dto: AuthDto) {
     // generate user hash
     const hash = await argon.hash(dto.password.toString());

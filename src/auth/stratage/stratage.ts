@@ -27,7 +27,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
         bookMarks: true,
       },
     });
-
     delete (await user).hash;
     return user;
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Controller, Get, Patch, Delete, Post, Param } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { CreateBookMarkDto } from './dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { userInfo } from 'os';
 import { EditBookMarkDto } from './dto/edit_bookmark.dto';
 

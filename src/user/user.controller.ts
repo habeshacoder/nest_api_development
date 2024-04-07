@@ -12,7 +12,7 @@ import {
 import { Request } from 'express';
 import { JwtGuard } from '../auth/guard/jwt.guard';
 import { User } from '@prisma/client';
-import { CurrentUser } from 'src/auth/decorator/current_user.decorator';
+import { CurrentUser } from '../auth/decorator/current_user.decorator';
 import { EditUserDto } from './dto/edit_user.dto';
 import { UserService } from './user.service';
 

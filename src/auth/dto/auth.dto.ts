@@ -4,16 +4,16 @@ export class AuthDto {
   // Class properties and methods can be defined here
   @IsEmail()
   @IsNotEmpty()
-  email: String;
+  email: string;
   @IsString()
   @IsNotEmpty()
-  password: String;
+  password: string;
   @IsString()
   @IsNotEmpty()
-  sex: String;
+  sex: string;
   @IsNotEmpty()
-  lastName: String;
+  lastName: string;
   @IsString()
   @IsNotEmpty()
-  firstName: String;
+  firstName: string;
 }
