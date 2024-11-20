@@ -37,7 +37,7 @@ export class AuthService {
     if (!pwVerify) {
       return new ForbiddenException('Credential Incorrect');
     }
-    console.log(this.prismaService.user.fields.sex);
+    
     delete user.hash;
     return this.signInToken(user.id, user.email);
   }
